@@ -1,0 +1,72 @@
+# ============================================================
+# SE_MANIFEST.toml (Repository Declaration)
+# ============================================================
+
+schema = "se-manifest-2"
+
+# === Identity ===
+
+[meta]
+# WHY: Minimal metadata; versioned separately via Git tags
+name = "se-admin"
+org = "structural-explainability"
+status = "active"
+version = "0.1.0"
+
+[repo]
+# WHY: Repo identity is defined structurally
+class = "admin"
+summary = "Administrative tooling and automation for the SE ecosystem."
+
+# === Structural contract ===
+
+[depends]
+# WHY: Constitution is the root; no upstream dependencies
+optional = []
+required = ["se-constitution"]
+
+[provides]
+# WHY: Explicit artifact ownership (core to this repository)
+artifacts = [
+  "scaffold",
+  "sync",
+  "validation-orchestration",
+  "workflows",
+]
+
+[scope]
+# WHY: Keep this tight and structural
+includes = [
+  "repository scaffolding",
+  "configuration propagation",
+  "cross-repository validation execution",
+  "shared workflow definitions",
+]
+
+excludes = [
+  "definition of structural primitives",
+  "definition of validation rules",
+  "domain semantics",
+]
+
+[validation]
+entrypoint = "se_admin.app:run_show"
+
+# === Behavior / governance ===
+
+[naming]
+# WHY: Declares expected repo-family naming convention
+pattern = "se-*"
+
+[governance]
+# WHY: Declares governing authority for this repository
+authority = "structural-explainability"
+
+# === External references ===
+
+[citation]
+cff = "CITATION.cff"
+
+[traceability]
+# WHY: Reserved for future identifier resolution
+identifier_map = "none"
