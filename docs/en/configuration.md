@@ -68,13 +68,13 @@ paths = ["lychee.toml", ".lychee.toml"]
 
 ### Task fields
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| `[task].id` | yes | Unique identifier, used with `run` command |
-| `[task].label` | yes | Human-readable description |
-| `[source].repo` | no | Canonical source repo for file-copy operations |
-| `[selector]` | no | Which repos to target (see below) |
-| `[[operations]]` | yes | One or more operation dicts |
+| Field            | Required | Description                                    |
+| ---------------- | -------- | ---------------------------------------------- |
+| `[task].id`      | yes      | Unique identifier, used with `run` command     |
+| `[task].label`   | yes      | Human-readable description                     |
+| `[source].repo`  | no       | Canonical source repo for file-copy operations |
+| `[selector]`     | no       | Which repos to target (see below)              |
+| `[[operations]]` | yes      | One or more operation dicts                    |
 
 ### Selectors
 
@@ -94,14 +94,14 @@ pattern = "^se-theory-"
 
 ### Operation types
 
-| type | required fields | description |
-|------|----------------|-------------|
-| `ensure_exact_files` | `paths` | Copy files from source repo if absent or changed |
-| `delete_files` | `paths` | Delete files, no-op if missing |
-| `add_dependency` | `group`, `name` | Add to `pyproject.toml` optional-dependencies |
-| `remove_dependency` | `group`, `name` | Remove from optional-dependencies |
-| `ensure_workflow` | `name` | Add workflow if not present |
-| `replace_workflow` | `name` | Overwrite workflow unconditionally |
-| `remove_workflow` | `name` | Delete workflow, no-op if missing |
-| `git_pull` | - | `git pull --ff-only` |
-| `merge_dependabot_prs` | - | Merge all open Dependabot PRs via `gh` |
+| type                   | required fields | description                                      |
+| ---------------------- | --------------- | ------------------------------------------------ |
+| `ensure_exact_files`   | `paths`         | Copy files from source repo if absent or changed |
+| `delete_files`         | `paths`         | Delete files, no-op if missing                   |
+| `add_dependency`       | `group`, `name` | Add to `pyproject.toml` optional-dependencies    |
+| `remove_dependency`    | `group`, `name` | Remove from optional-dependencies                |
+| `ensure_workflow`      | `name`          | Add workflow if not present                      |
+| `replace_workflow`     | `name`          | Overwrite workflow unconditionally               |
+| `remove_workflow`      | `name`          | Delete workflow, no-op if missing                |
+| `git_pull`             | -               | `git pull --ff-only`                             |
+| `merge_dependabot_prs` | -               | Merge all open Dependabot PRs via `gh`           |

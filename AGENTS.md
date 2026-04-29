@@ -59,7 +59,6 @@ uv run python -m zensical build
 - pre-commit runs only on tracked / staged files.
 - Developers should `git add -A` files before expecting hooks to run.
 
-
 ## SE Admin CLI
 
 All admin operations run through the CLI. Use `--dry-run` before any mutating command.

@@ -6,16 +6,6 @@
 uv run python -m se_admin check --repo se-admin
 ```
 
-```text
-se-admin  (6 pass, 0 fail)
-  ✓ [required_paths]  pyproject.toml
-  ✓ [required_paths]  src
-  ✓ [required_paths]  tests
-  ✓ [required_workflows]  .github/workflows/ci-python-zensical.yml
-  ✓ [required_paths]  zensical.toml
-  ✓ [required_workflows]  .github/workflows/deploy-zensical.yml
-```
-
 ## Check an entire repo set
 
 ```bash
@@ -28,18 +18,6 @@ Preview what a task would do without making any changes.
 
 ```bash
 uv run python -m se_admin run normalize_core_files --dry-run
-```
-
-```text
-[dry-run] Task: Ensure all canonical files are present
-
-  to se-constitution
-    – ensure_exact_files: would run ensure_exact_files
-    – delete_files: would run delete_files
-
-  to se-admin
-    – ensure_exact_files: would run ensure_exact_files
-    – delete_files: would run delete_files
 ```
 
 ## Migrate MkDocs to Zensical across a set
