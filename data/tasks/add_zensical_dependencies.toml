@@ -1,0 +1,12 @@
+# data/tasks/add_zensical_dependencies.toml
+
+[task]
+id = "add_zensical_dependencies"
+label = "Add Zensical to docs dependencies"
+
+# === ADD DEPENDENCY ===
+
+[[operations]]
+type = "add_dependency"
+group = "docs"
+name = "zensical"

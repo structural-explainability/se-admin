@@ -1,0 +1,89 @@
+# data/repos.toml
+
+# repos.toml = which repos exist and which profiles they compose
+# profiles.toml = what each profile requires
+
+[family]
+id = "structural-explainability"
+label = "Structural Explainability"
+workspace_root = ".."
+
+# === REPO SETS ===
+
+[repo_sets.theory]
+label = "Theory repositories"
+repos = [
+  "se-theory-neutral-substrate",
+  "se-theory-identity-regimes",
+  "se-theory-structural-explainability",
+]
+
+[repo_sets.foundation]
+label = "Foundation repositories"
+repos = [
+  "se-constitution",
+  "se-admin",
+  "se-kernel",
+  "se-mapspec",
+]
+
+[repo_sets.papers]
+label = "Paper repositories"
+repos = [
+  "se-paper-100",
+  "se-paper-200",
+  "se-paper-300",
+]
+
+[repo_sets.legacy]
+label = "Legacy specification repositories"
+repos = [
+  "spec-se",
+]
+
+# === REPOSITORIES ===
+
+[repos.se-theory-neutral-substrate]
+repo_set = "theory"
+profiles = ["all_repos","lean", "python_tooling", "zensical", "links"]
+
+[repos.se-theory-identity-regimes]
+repo_set = "theory"
+profiles = ["all_repos","lean", "python_tooling", "zensical", "links", "reference"]
+
+[repos.se-theory-structural-explainability]
+repo_set = "theory"
+profiles = ["all_repos","lean", "python_tooling", "zensical", "links"]
+
+[repos.se-constitution]
+repo_set = "foundation"
+profiles = ["all_repos","python_package", "zensical", "links", "reference"]
+
+[repos.se-admin]
+repo_set = "foundation"
+profiles = ["all_repos","python_package", "zensical", "links"]
+
+[repos.se-kernel]
+repo_set = "foundation"
+profiles = ["all_repos","python_package", "zensical", "links"]
+
+[repos.se-mapspec]
+repo_set = "foundation"
+profiles = ["all_repos","python_package", "zensical", "links", "reference"]
+
+[repos.se-paper-100]
+repo_set = "papers"
+profiles = ["all_repos","paper_latex", "links"]
+
+[repos.se-paper-200]
+repo_set = "papers"
+profiles = ["all_repos","paper_latex", "links"]
+
+[repos.se-paper-300]
+repo_set = "papers"
+profiles = ["all_repos","paper_latex", "links"]
+
+[repos.spec-se]
+repo_set = "legacy"
+profiles = ["all_repos","reference", "links"]
+status = "legacy"

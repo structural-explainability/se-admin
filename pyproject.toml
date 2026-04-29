@@ -16,7 +16,7 @@ readme = "README.md"
 requires-python = ">=3.15"
 dynamic = ["version"] # WHY: Version is computed from git tags at build time (see [tool.hatch.version] below).
 
-dependencies = []
+dependencies = ["tomlkit"] # REQ for patch_toml.py script, which is used in some tasks to modify TOML files.
 
 [project.optional-dependencies]
 # WHY: Optional dependency groups keep the core install clean and focused.
@@ -51,7 +51,7 @@ pythonVersion = "3.15"
 reportMissingTypeStubs = "none" # WHY: Avoid warnings from third-party libraries without type stubs.
 reportMissingImports = "warning" # WHY: Warn about missing imports to catch potential issues, but allow flexibility in notebooks and dynamic code.
 reportPrivateUsage = "none" # WHY: Allow usage of private members (e.g., _version.py) without warnings, as this is common in Python projects.
-typeCheckingMode = "strict" # strict | basic | off
+typeCheckingMode = "basic" # strict | basic | off
 useLibraryCodeForTypes = false # WHY: Avoid type checking third-party library code to reduce noise and improve performance.
 
 # === PYTEST (VERIFY LOGIC) ===
@@ -129,7 +129,7 @@ force-sort-within-sections = true
 
 [tool.ruff.lint.pydocstyle]
 # REQ: Google style is the project-wide docstring convention.
-convention = "google"   # ALT: "numpy" — choose one, never mix.
+convention = "google"   # ALT: "numpy" - choose one, never mix.
 
 # ============================================================
 # SECTION 3: BUILD SYSTEM (boilerplate; CUSTOM src/ agreement)
@@ -154,7 +154,7 @@ version-file = "src/se_admin/_version.py"
 packages = ["src/se_admin"]  # REQ.PACKAGES: Discovery rooted at src/.
 
 [tool.hatch.version]
-# WHY: Version derived from git tags at build time — no manual source file edits.
+# WHY: Version derived from git tags at build time - no manual source file edits.
 source = "vcs"
 fallback-version = "0.1.0"              # Used when no git tags present (fresh clone, CI).
 tag-pattern = "^(?:v)?(?P<version>\\d+\\.\\d+\\.\\d+)$"

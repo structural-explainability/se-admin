@@ -1,0 +1,40 @@
+# data/tasks/add_zensical.toml
+# Add Zensical documentation alongside existing MkDocs setup,
+# without removing MkDocs configuration or workflows.
+
+[task]
+id = "add_zensical"
+label = "Introduce Zensical alongside existing docs tooling"
+
+[source]
+repo = "se-admin"
+
+# === Parameters (simple substitution)
+
+[params]
+repo_url_template = "https://github.com/{repo}"
+site_url_template = "https://{owner}.github.io/{repo}/"
+
+# === Operations ===
+
+# Ensure Zensical config (from template)
+[[operations]]
+type = "ensure_exact_file"
+path = "zensical.toml"
+template = "zensical_base"
+
+# Ensure workflow
+[[operations]]
+type = "ensure_exact_file"
+path = ".github/workflows/deploy-zensical.yml"
+
+# Add docs dependency
+[[operations]]
+type = "add_dependency"
+group = "docs"
+name = "zensical"
+
+# Ensure docs folder exists
+[[operations]]
+type = "ensure_directory"
+path = "docs"

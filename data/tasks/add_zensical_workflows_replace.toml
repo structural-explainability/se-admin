@@ -1,0 +1,27 @@
+# data/tasks/add_zensical_workflows_replace.toml
+
+[task]
+id = "replace_docs_workflows"
+label = "Replace docs workflows with Zensical versions"
+
+[source]
+repo = "se-admin"
+
+# === DELETE MKDOCS WORKFLOWS ===
+
+[[operations]]
+type = "delete_files"
+paths = [
+  ".github/workflows/deploy-mkdocs.yml",
+  ".github/workflows/deploy-docs.yml",
+  ".github/workflows/docs.yml",
+]
+
+# === ADD ZENSICAL WORKFLOWS ===
+
+[[operations]]
+type = "ensure_exact_files"
+paths = [
+  ".github/workflows/deploy-zensical.yml",
+  ".github/workflows/ci-python-zensical.yml",
+]

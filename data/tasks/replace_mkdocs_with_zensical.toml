@@ -1,0 +1,31 @@
+# data/tasks/replace_mkdocs_with_zensical.toml
+
+[task]
+id = "replace_mkdocs_with_zensical"
+label = "Replace existing docs deployment with Zensical"
+
+[source]
+repo = "se-admin"
+
+
+# === DELETE ===
+
+
+[[operations]]
+type = "delete_files"
+paths = [
+    ".github/workflows/deploy-mkdocs.yml",
+    ".github/workflows/deploy-docs.yml",
+    ".github/workflows/docs.yml",
+]
+
+
+# === ENSURE ===
+
+
+[[operations]]
+type = "ensure_exact_files"
+paths = [
+    ".github/workflows/deploy-zensical.yml",
+    ".github/workflows/ci-python-zensical.yml",
+]

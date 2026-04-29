@@ -1,0 +1,18 @@
+# data/tasks/normalize_lychee_location.toml
+# Move lychee.toml to .github/lychee.toml for better organization
+# of GitHub-related configuration.
+
+[task]
+id = "normalize_lychee_location"
+label = "Normalize lychee configuration file location"
+
+selector = "all_repos"
+
+[[operations]]
+type = "delete_file"
+path = "lychee.toml"
+
+[[operations]]
+type = "ensure_exact_file"
+source_repo = "se-admin"
+path = ".github/lychee.toml"

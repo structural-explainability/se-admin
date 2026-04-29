@@ -11,7 +11,7 @@ schema = "se-manifest-2"
 name = "se-admin"
 org = "structural-explainability"
 status = "active"
-version = "0.1.0"
+version = "0.1.1"
 
 [repo]
 # WHY: Repo identity is defined structurally
@@ -50,7 +50,7 @@ excludes = [
 ]
 
 [validation]
-entrypoint = "se_admin.app:run_show"
+entrypoint = "se_admin.cli:main"
 
 # === Behavior / governance ===
 

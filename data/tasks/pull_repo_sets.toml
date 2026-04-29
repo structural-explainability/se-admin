@@ -1,0 +1,17 @@
+# data/tasks/pull_repo_sets.toml
+# Pull latest changes for selected repo sets
+# to update local clones and trigger any dependent workflows.
+
+[task]
+id = "pull_repo_sets"
+label = "Pull latest changes for selected repo sets"
+
+# === SELECT REPO SETS ===
+
+[selector]
+repo_sets = ["foundation", "theory"]
+
+# === PULL LATEST CHANGES ===
+
+[[operations]]
+type = "git_pull"

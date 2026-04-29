@@ -1,0 +1,91 @@
+# data/profiles.toml
+
+# repos.toml = which repos exist and which profiles they compose
+# profiles.toml = what each profile requires
+
+# === ALL REPOSITORIES ===
+
+[profiles.all_repos]
+label = "Baseline for all repositories"
+description = "Every repository in the ecosystem must satisfy this profile."
+extends = ["markdown", "links"]
+
+# === GO REPOSITORIES ===
+
+# === HTML/CSS/JS REPOSITORIES ===
+
+[profiles.html_static]
+label = "Static HTML documentation repository"
+description = "Repository serving pre-authored HTML, no build step."
+required_paths = ["docs/index.html"]
+
+# === LATEX PAPER REPOSITORIES ===
+
+[profiles.paper_latex]
+label = "LaTeX paper repository"
+description = "Repository containing a LaTeX paper source."
+required_paths = ["README.md", "LICENSE"]
+optional_paths = ["main.tex", "paper.tex", "references.bib", "latexmkrc"]
+
+
+# === LEAN THEOREM PROVING REPOSITORIES ===
+
+[profiles.lean]
+label = "Lean repository"
+description = "Repository containing Lean formalization artifacts."
+required_paths = ["lean-toolchain", "lakefile.toml"]
+required_workflows = ["ci-lean.yml"]
+
+# == MARKDOWN REPOSITORIES ===
+
+[profiles.markdown]
+label = "Markdown repository"
+description = "Repository containing Markdown documentation."
+required_paths = [".markdownlint.yml","README.md"]
+
+# === PYTHON SRC REPOSITORIES ===
+
+[profiles.python_package]
+label = "Python package repository"
+description = "Repository containing a Python package with source layout."
+required_paths = ["pyproject.toml", "src", "tests"]
+required_workflows = ["ci-python-zensical.yml"]
+
+# === PYTHON FOR TOOLING ONLY REPOSITORIES ===
+
+[profiles.python_tooling]
+label = "Python tooling repository"
+description = "Repository using Python for repository tooling, documentation, or automation without a package contract."
+required_paths = ["pyproject.toml"]
+required_workflows = ["ci-python-zensical-tooling.yml"]
+
+# === PYTHON ZENSICAL REPOSITORIES ===
+
+[profiles.zensical]
+# this repo has docs built by Zensical using Python
+# therefore pyproject.toml must include Zensical in docs dependencies
+label = "Zensical documentation repository"
+description = "Repository that builds documentation with Zensical."
+required_paths = ["zensical.toml", "docs"]
+required_workflows = ["deploy-zensical.yml"]
+
+[profiles.zensical.pyproject]
+required_optional_dependency_groups = ["docs"]
+
+[profiles.zensical.pyproject.optional_dependencies.docs]
+required = ["zensical"]
+
+# === REPOSITORIES WITH LINK CHECKING ===
+
+
+[profiles.links]
+label = "Link-checked repository"
+description = "Repository checked with the standard link-checking workflow."
+required_workflows = ["links.yml"]
+
+# === REPOSITORIES WITH REFERENCE ARTIFACTS ===
+
+[profiles.reference]
+label = "Reference artifact repository"
+description = "Repository containing canonical reference or specification artifacts."
+required_paths = ["reference"]

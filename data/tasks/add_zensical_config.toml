@@ -1,0 +1,20 @@
+# data/tasks/add_zensical_config.toml
+# Add Zensical configuration and docs structure,
+# without modifying existing MkDocs setup.
+
+[task]
+id = "add_zensical_config"
+label = "Add Zensical configuration and docs structure"
+
+# === Canonical Source ===
+
+[source]
+repo = "se-admin"
+
+# === Operations ===
+
+[[operations]]
+type = "ensure_exact_files"
+paths = [
+  "zensical.toml",
+]

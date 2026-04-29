@@ -2,9 +2,9 @@
 
 Administration and enforcement for the SE ecosystem.
 
-## Capabilities
+## Overview
 
-- [Scaffold](./scaffold/)
-- [Sync](./sync/)
-- [Validate](./validate/)
-- [Workflows](./workflows/)
+- [Commands](./commands.md) - CLI commands
+- [Concepts](./concepts.md) - mental model
+- [Configuration](./configuration.md)
+- [Examples](./examples.md)

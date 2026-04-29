@@ -1,4 +1,4 @@
-# ./AGENTS.md
+# ./AGENTS.md (SE Admin)
 
 ## Scope
 
@@ -58,3 +58,18 @@ uv run python -m zensical build
 
 - pre-commit runs only on tracked / staged files.
 - Developers should `git add -A` files before expecting hooks to run.
+
+
+## SE Admin CLI
+
+All admin operations run through the CLI. Use `--dry-run` before any mutating command.
+
+```shell
+uv run python -m se_admin repos
+uv run python -m se_admin tasks
+uv run python -m se_admin check --set foundation
+uv run python -m se_admin run  --dry-run
+uv run python -m se_admin run
+```
+
+Task files live in `data/tasks/`. Filename must match `[task].id`.

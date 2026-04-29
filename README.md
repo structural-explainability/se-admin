@@ -12,6 +12,11 @@
 > Structural Explainability Admin:
 > administration of the SE ecosystem.
 
+SE Admin is a data-driven system that applies composable operations
+over repository surfaces
+with declarative targets and selectable scope
+to move repos between states.
+
 ## Owns
 
 - enforcement of constitution (automation)
@@ -41,6 +46,120 @@ bulk operations
 - dependency upgrades
 - structural updates
 
+## Overview
+
+```text
+data/       = declared desired state, no logic, only declarations
+observe/    = actual repo state, no decisions, only facts
+checks/     = pure comparison, no side effects
+actions/    = primitive mutations
+migrations/ = composed actions
+reports/    = human/machine output projections only
+```
+
+```text
+domain/
+  repo        - repository
+  profile     = named bundle of expectations (paths, workflows, checks)
+  selector    = how you choose repos (set, name, pattern)
+  finding     = result of a check
+```
+
+```text
+repos.toml       = instances: which repos exist, repo sets, assigned profiles
+profiles.toml    = reusable traits: profile definitions
+checks.toml      = constraints: check definitions and canonical comparisons
+migrations.toml  = transformations: named migration recipes
+```
+
+```text
+data (declared) -> observe (actual) -> checks (compare) -> actions/migrations -> reports
+```
+
+## Operation Requirements
+
+Data describes operations and a small interpreter executing them
+
+All operations must be:
+
+- deterministic
+- idempotent
+- side-effect scoped
+
+Examples:
+
+- delete_file is OK if missing
+- add_dependency is OK if already present
+- replace_text is no-op if not found
+
+## Operation Taxonomy
+
+### Detection (no side effects)
+
+- path_exists
+- path_missing
+- toml_key_exists
+- toml_value_equals
+- dependency_present
+- workflow_present
+
+### Mutation (single responsibility)
+
+Filesystem
+
+- create_file
+- delete_file
+- copy_file
+- ensure_directory
+- rename_path
+  TOML
+- toml_set_key
+- toml_remove_key
+- toml_add_dependency
+- toml_remove_dependency
+- toml_ensure_table
+  Workflows (still files, but special intent)
+- ensure_workflow
+- remove_workflow
+- replace_workflow
+  Text
+- replace_block
+- insert_block
+- remove_block
+  Process
+- run_command
+
+## Composition
+
+```text
+Operation =
+  AtomicOperation
+  | Sequence[Operation]
+  | Conditional(condition, Operation)
+```
+
+## Example
+
+A tool transition is a declarative description of how to
+remove one capability and establish another across all affected surfaces.
+
+```text
+Sequence(
+  Conditional(detect_mkdocs, Sequence(
+    delete_file("mkdocs.yml"),
+    toml_remove_dependency("mkdocs"),
+    remove_workflow("deploy-mkdocs.yml")
+  )),
+
+  Sequence(
+    create_file("zensical.toml"),
+    toml_add_dependency(group="docs", name="zensical"),
+    ensure_workflow("deploy-zensical.yml"),
+    ensure_directory("docs")
+  )
+)
+```
+
 ## Command Reference
 
 <details>
@@ -48,12 +167,10 @@ bulk operations
 
 ### In a machine terminal
 
-After you get a copy of this repo in your own GitHub account,
-open a machine terminal in `Repos` or where you want the project:
+Open a machine terminal where you want the project:
 
 ```shell
-# Replace username with YOUR GitHub username.
-git clone https://github.com/username/se-admin
+git clone https://github.com/structural-explainability/se-admin
 
 cd se-admin
 code .

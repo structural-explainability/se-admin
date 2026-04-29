@@ -1,0 +1,33 @@
+# data/tasks/normalize_core_files.toml
+
+[task]
+id = "normalize_core_files"
+label = "Normalize core configuration files"
+
+[source]
+repo = "se-admin"
+
+# === STANDARD FILES ===
+
+# Ensure all canonical files
+[[operations]]
+type = "ensure_exact_files"
+paths = [
+  ".gitignore",
+  ".gitattributes",
+  ".editorconfig",
+  ".markdownlint.json",
+  ".github/lychee.toml",
+  ".github/workflows/links.yml",
+]
+
+# === DEPRECATED FILES ===
+
+
+# Remove legacy lychee config in root
+[[operations]]
+type = "delete_files"
+paths = [
+  "lychee.toml",
+  ".lychee.toml",
+]
