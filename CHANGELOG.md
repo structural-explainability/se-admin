@@ -126,6 +126,7 @@ Sync reads `CITATION.cff` version and `date-released`
 and updates `pyproject.toml` fallback-version.
 
 ```shell
+uv sync --extra dev --extra docs --upgrade
 uv run python -m se_manifest_schema sync-version
 uv run python -m se_manifest_schema validate --strict
 git add -A
@@ -133,13 +134,17 @@ uvx pre-commit run --all-files
 uv run python -m pyright
 uv run python -m pytest
 uv run python -m zensical build
+
+uv run python -m build
+uv run python -m twine check dist/*
+uv run python -c "import pathlib, zipfile; wheels=list(pathlib.Path('dist').glob('*.whl')); assert wheels, 'No wheel found'; wheel=wheels[-1]; names=zipfile.ZipFile(wheel).namelist(); assert any(n == 'se_admin/__init__.py' for n in names); assert any(n.endswith('.dist-info/entry_points.txt') for n in names); print([n for n in names if n == 'se_admin/__init__.py' or n.endswith('.dist-info/entry_points.txt')])"
 ```
 
 ### Task 4. Commit, tag, push
 
 ```shell
 git add -A
-git commit -m "Release X.Y.Z"
+git commit -m "Prep X.Y.Z"
 git push -u origin main
 ```
 

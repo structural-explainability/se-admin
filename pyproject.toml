@@ -26,17 +26,34 @@ dependencies = [
 dev = [
     # REQ.DEV.DEPS: External packages used for linting, testing, type checking, etc.
     "build", # WHY: build tool required for packaging and publishing.
+    "packaging",  # WHY: Required by validate-pyproject for dependency and license validation.
     "pre-commit",
     "pyright",
     "pytest",
     "pytest-cov",
     "ruff",
+    "twine",  # WHY: Required for artifact validation (twine check dist/*).
 ]
 
 docs = [
     # REQ.DOCS.DEPS: External packages used to generate project documentation.
     "zensical==0.0.37", # WHY: Link resolution fails with newer versions; pinning to a known working version.
 ]
+
+[project.scripts]
+se-admin = "se_admin.cli:main"
+# WHY: Defines the CLI entry point. Only one:
+# one tool, multiple subcommands is clean and
+# matches how tools like git and uv work
+
+[project.urls]
+Homepage = "https://github.com/structural-explainability/se-admin"
+Repository = "https://github.com/structural-explainability/se-admin"
+Documentation = "https://structural-explainability.github.io/se-admin/"
+Issues = "https://github.com/structural-explainability/se-admin/issues"
+Changelog = "https://github.com/structural-explainability/se-admin/blob/main/CHANGELOG.md"
+
+
 
 # ============================================================
 # SECTION 2: TOOL CONFIGURATION (Professional basics)
