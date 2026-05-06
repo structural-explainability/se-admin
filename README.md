@@ -1,5 +1,6 @@
 # se-admin
 
+[![PyPI](https://img.shields.io/pypi/v/se-admin?logo=pypi&label=pypi)](https://pypi.org/project/se-admin/)
 [![Docs Site](https://img.shields.io/badge/docs-site-blue?logo=github)](https://structural-explainability.github.io/se-admin/)
 [![Repo](https://img.shields.io/badge/repo-GitHub-black?logo=github)](https://github.com/structural-explainability/se-admin)
 [![Python 3.15+](https://img.shields.io/badge/python-3.15%2B-blue?logo=python)](./pyproject.toml)
@@ -7,6 +8,7 @@
 
 [![CI](https://github.com/structural-explainability/se-admin/actions/workflows/ci-python-zensical.yml/badge.svg?branch=main)](https://github.com/structural-explainability/se-admin/actions/workflows/ci-python-zensical.yml)
 [![Docs](https://github.com/structural-explainability/se-admin/actions/workflows/deploy-zensical.yml/badge.svg?branch=main)](https://github.com/structural-explainability/se-admin/actions/workflows/deploy-zensical.yml)
+[![Release](https://github.com/structural-explainability/se-admin/actions/workflows/release-pypi.yml/badge.svg?branch=main)](https://github.com/structural-explainability/se-admin/actions/workflows/release-pypi.yml)
 [![Links](https://github.com/structural-explainability/se-admin/actions/workflows/links.yml/badge.svg?branch=main)](https://github.com/structural-explainability/se-admin/actions/workflows/links.yml)
 
 > Structural Explainability Admin:
