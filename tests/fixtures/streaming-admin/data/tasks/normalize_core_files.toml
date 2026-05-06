@@ -1,0 +1,36 @@
+# data/tasks/normalize_core_files.toml
+
+[task]
+id = "normalize_core_files"
+label = "Normalize core configuration files"
+
+[source]
+repo = "streaming-00-admin"
+
+[selector]
+repo_sets = ["modules"]
+
+# === STANDARD FILES ===
+
+# Ensure all canonical files
+[[operations]]
+type = "ensure_exact_files"
+paths = [
+  ".gitignore",
+  ".gitattributes",
+  ".editorconfig",
+  ".markdownlint-cli2.yaml",
+  ".github/lychee.toml",
+  ".github/workflows/links.yml",
+]
+
+# === DEPRECATED FILES ===
+
+
+# Remove legacy lychee config in root
+[[operations]]
+type = "delete_files"
+paths = [
+  "lychee.toml",
+  ".lychee.toml",
+]

@@ -179,6 +179,9 @@ code .
 ### In a VS Code terminal
 
 ```shell
+# if strange errors, clean uv cache
+# uv cache clean
+
 uv self update
 uv python pin 3.15
 uv sync --extra dev --extra docs --upgrade
@@ -195,9 +198,6 @@ uvx pre-commit run --all-files
 uv run python -m se_admin show
 
 # do chores
-npx markdownlint-cli "**/*.md" --fix
-uv run python -m ruff format .
-uv run python -m ruff check . --fix
 uv run python -m pyright
 uv run python -m pytest
 uv run python -m zensical build
@@ -207,6 +207,16 @@ git add -A
 git commit -m "update"
 git push -u origin main
 ```
+
+Portability fixture checks verifying that `se-admin`
+can load and operate on a non-SE repository family
+using an alternate data root.
+
+```shell
+uv run python -m se_admin --data tests/fixtures/streaming-admin/data repos
+uv run python -m se_admin --data tests/fixtures/streaming-admin/data check --set modules
+uv run python -m se_admin --data tests/fixtures/streaming-admin/data check --set admin
+uv run python -m se_admin --data tests/fixtures/streaming-admin/data run --dry-run normalize_core_files
 
 </details>
 

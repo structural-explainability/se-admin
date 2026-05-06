@@ -1,0 +1,13 @@
+# data/tasks/remove_mkdocs_config.toml
+
+[task]
+id = "remove_mkdocs_config"
+label = "Remove MkDocs configuration file"
+
+# === DELETE MKDOCS CONFIG FILE (AFTER ZENSICAL MIGRATION) ===
+
+[[operations]]
+type = "delete_files"
+paths = [
+  "mkdocs.yml",
+]

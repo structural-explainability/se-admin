@@ -1,0 +1,8 @@
+[project]
+name = "fixture-repository"
+version = "0.0.0"
+requires-python = ">=3.15"
+
+[project.optional-dependencies]
+dev = []
+docs = ["zensical"]

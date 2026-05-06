@@ -1,0 +1,15 @@
+# data/tasks/remove_mkdocs_dependencies.toml
+
+[task]
+id = "remove_mkdocs_dependencies"
+label = "Remove MkDocs dependencies from docs group"
+
+# === REMOVE DEPENDENCIES ===
+
+[[operations]]
+type = "remove_dependencies"
+group = "docs"
+names = [
+  "mkdocs",
+  "mkdocs-material",
+]

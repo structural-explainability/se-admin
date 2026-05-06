@@ -1,6 +1,7 @@
 # ============================================================
 # .gitignore (Keep unnecessary files out of the repository)
 # ============================================================
+# Updated 2026-05-06
 
 # REQ.UNIVERSAL: All professional GitHub project repositories MUST include .gitignore.
 # WHY: Prevent committing generated artifacts, local state, secrets, and OS-specific files.
@@ -27,6 +28,8 @@ PRIVATE-NOTES.md
 
 # WHY: Commit recommended extensions (opt-in) for consistent development experience.
 # NOTE: Share recommendations, not personal editor styles or preferences.
+# Must reinclude directory first so Git will traverse
+!.vscode/
 !.vscode/extensions.json
 !.vscode/settings.json
 

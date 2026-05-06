@@ -1,0 +1,46 @@
+# tests/fixtures/streaming-admin/data/profiles.toml
+
+# Fixture profiles copied down to the minimal set needed for portability tests.
+
+# === ALL REPOSITORIES ===
+
+[profiles.all_repos]
+label = "Baseline for all repositories"
+description = "Every repository in the family must satisfy this profile."
+extends = ["markdown", "links"]
+
+# === MARKDOWN REPOSITORIES ===
+
+[profiles.markdown]
+label = "Markdown repository"
+description = "Repository containing Markdown documentation."
+required_paths = [".markdownlint.yml", "README.md"]
+
+# === PYTHON SRC REPOSITORIES ===
+
+[profiles.python_package]
+label = "Python package repository"
+description = "Repository containing a Python package with source layout."
+required_paths = ["pyproject.toml", "src", "tests"]
+required_workflows = ["ci-python-zensical.yml"]
+
+# === PYTHON ZENSICAL REPOSITORIES ===
+
+[profiles.zensical]
+label = "Zensical documentation repository"
+description = "Repository that builds documentation with Zensical."
+required_paths = ["zensical.toml", "docs"]
+required_workflows = ["deploy-zensical.yml"]
+
+[profiles.zensical.pyproject]
+required_optional_dependency_groups = ["docs"]
+
+[profiles.zensical.pyproject.optional_dependencies.docs]
+required = ["zensical"]
+
+# === REPOSITORIES WITH LINK CHECKING ===
+
+[profiles.links]
+label = "Link-checked repository"
+description = "Repository checked with the standard link-checking workflow."
+required_workflows = ["links.yml"]

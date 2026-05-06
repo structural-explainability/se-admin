@@ -1,0 +1,30 @@
+# data/tasks/sync_dependabot_and_pull.toml
+# Auto accept all dependabot PRs,
+# then pull latest changes for selected repo sets
+# to update local clones and trigger any dependent workflows.
+
+[task]
+id = "sync_dependabot_and_pull"
+label = "Merge safe Dependabot updates and pull local repos"
+
+# === SELECT REPO SETS ===
+
+[selector]
+repo_sets = ["foundation"]
+
+# === MERGE DEPENDABOT PRS ===
+
+[[operations]]
+type = "merge_dependabot_prs"
+author = "dependabot[bot]"
+require_checks_passing = true
+
+# OR IF AVAILABLE
+# [[operations]]
+# type = "merge_dependabot_prs"
+
+# === PULL LATEST CHANGES ===
+
+[[operations]]
+type = "git_pull"
+mode = "ff_only"

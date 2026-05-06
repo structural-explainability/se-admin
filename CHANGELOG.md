@@ -7,7 +7,31 @@ All notable changes to this project will be documented in this file.
 The format is based on **[Keep a Changelog](https://keepachangelog.com/en/1.1.0/)**
 and this project adheres to **[Semantic Versioning](https://semver.org/spec/v2.0.0.html)**.
 
+---
+
 ## [Unreleased]
+
+---
+
+## [0.2.0] - 2026-05-06
+
+### Added
+
+- Added PyPI release workflows for pre-release validation and package publishing.
+- Added portability fixture data for a non-SE streaming course repository family.
+- Added fixture task coverage for loading repo declarations, profiles, task files,
+  and dry-run operations from an alternate `--data` root.
+- Added `DECISIONS.md` to record repository architecture and manifest-validation rationale.
+- Added `AGENT_CONDUCT.md` and agent-facing repository guidance files.
+- Added VS Code workspace recommendations and settings.
+
+### Changed
+
+- Replaced `.markdownlint.yml` with `.markdownlint-cli2.yaml`.
+- Updated core-file normalization tasks to use `.markdownlint-cli2.yaml`.
+- Updated packaging configuration for PyPI source distributions and Hatch VCS versioning.
+- Added `se-manifest-schema` as a dependency so `se-admin` can
+  centralize `SE_MANIFEST.toml` validation across managed repositories.
 
 ---
 
@@ -81,23 +105,72 @@ and this project adheres to **[Semantic Versioning](https://semver.org/spec/v2.0
 ## Notes on versioning and releases
 
 - We use **SemVer**:
-  - **MAJOR** – breaking changes to artifact structure or validation semantics
-  - **MINOR** – backward-compatible additions to schema or validation rules
+  - **MAJOR** – breaking changes
+  - **MINOR** – backward-compatible additions
   - **PATCH** – fixes, documentation, tooling
 - Versions are driven by git tags. Tag `vX.Y.Z` to release.
 - Docs are deployed per version tag and aliased to **latest**.
-- Sample commands:
+
+## Release Procedure (Required)
+
+Follow these steps exactly when creating a new release.
+
+### Task 1. Update release metadata (manual edits)
+
+1.1. CITATION.cff: update version and date-released
+1.2. CHANGELOG.md: add section, move unreleased entries, update links
+
+### Task 2. Sync and validate
+
+Sync reads `CITATION.cff` version and `date-released`
+and updates `pyproject.toml` fallback-version.
 
 ```shell
-# as needed
-git tag -d v0.1.0
-git push origin :refs/tags/v0.1.0
-
-# new tag / release
-git tag v0.1.0 -m "0.1.0"
-git push origin v0.1.0
+uv run python -m se_manifest_schema sync-version
+uv run python -m se_manifest_schema validate --strict
+git add -A
+uvx pre-commit run --all-files
+uv run python -m pyright
+uv run python -m pytest
+uv run python -m zensical build
 ```
 
-[Unreleased]: https://github.com/structural-explainability/se-admin/compare/v0.1.1...HEAD
+### Task 4. Commit, tag, push
+
+```shell
+git add -A
+git commit -m "Release X.Y.Z"
+git push -u origin main
+```
+
+Verify actions run on GitHub. After success:
+
+```shell
+git tag vX.Y.Z -m "X.Y.Z"
+git push origin vX.Y.Z
+```
+
+### Task 5. Verify tag consistency
+
+```shell
+uv run python -m se_manifest_schema validate --strict --require-tag
+```
+
+Confirms CITATION.cff version matches the pushed git tag.
+Run this after `git push origin vX.Y.Z`; it will fail before that point.
+
+## Only As Needed (delete a tag)
+
+```shell
+git tag -d vX.Z.Y
+git push origin :refs/tags/vX.Z.Y
+```
+
+## Links
+
+[Unreleased]: https://github.com/structural-explainability/se-admin/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/structural-explainability/se-admin/releases/tag/v0.2.0
 [0.1.1]: https://github.com/structural-explainability/se-admin/releases/tag/v0.1.1
 [0.1.0]: https://github.com/structural-explainability/se-admin/releases/tag/v0.1.0
+
+<!-- markdownlint-enable MD024 -->

@@ -1,0 +1,60 @@
+# tests/fixtures/streaming-admin/data/repos.toml
+
+# Fixture proving that se-admin can operate on a non-SE repository family.
+
+[family]
+id = "streaming-data-course"
+label = "Streaming Data"
+workspace_root = "../workspace"
+
+# === REPO SETS ===
+
+[repo_sets.admin]
+label = "Course administration repository"
+repos = ["streaming-00-admin"]
+
+[repo_sets.modules]
+label = "Student-facing module repositories"
+repos = [
+    "streaming-01-foundations",
+    "streaming-02-kafka",
+    "streaming-03-data",
+    "streaming-04-visualization",
+    "streaming-05-storage",
+    "streaming-06-scenarios",
+    "streaming-07-applied",
+]
+
+# === REPOSITORIES ===
+
+[repos.streaming-00-admin]
+repo_set = "admin"
+profiles = ["all_repos", "python_package", "zensical", "links"]
+
+[repos.streaming-01-foundations]
+repo_set = "modules"
+profiles = ["all_repos", "python_package", "zensical", "links"]
+
+[repos.streaming-02-kafka]
+repo_set = "modules"
+profiles = ["all_repos", "python_package", "zensical", "links"]
+
+[repos.streaming-03-data]
+repo_set = "modules"
+profiles = ["all_repos", "python_package", "zensical", "links"]
+
+[repos.streaming-04-visualization]
+repo_set = "modules"
+profiles = ["all_repos", "python_package", "zensical", "links"]
+
+[repos.streaming-05-storage]
+repo_set = "modules"
+profiles = ["all_repos", "python_package", "zensical", "links"]
+
+[repos.streaming-06-scenarios]
+repo_set = "modules"
+profiles = ["all_repos", "python_package", "zensical", "links"]
+
+[repos.streaming-07-applied]
+repo_set = "modules"
+profiles = ["all_repos", "python_package", "zensical", "links"]

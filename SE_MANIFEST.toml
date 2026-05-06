@@ -1,33 +1,41 @@
 # ============================================================
 # SE_MANIFEST.toml (Repository Declaration)
+# se-manifest-schema
 # ============================================================
 
-schema = "se-manifest-2"
+schema = "se-manifest-schema"
+schema_url = "https://raw.githubusercontent.com/structural-explainability/se-manifest-schema/blob/main/manifest-schema.toml"
 
 # === Identity ===
 
 [meta]
-# WHY: Minimal metadata; versioned separately via Git tags
-name = "se-admin"
-org = "structural-explainability"
-status = "active"
-version = "0.1.1"
+purpose = "Manage repository projects in the Structural Explainability ecosystem."
 
 [repo]
-# WHY: Repo identity is defined structurally
+name = "se-admin"
+org = "structural-explainability"
 class = "admin"
+kind = "foundation"
+status = "active"
+since = "2026"
 summary = "Administrative tooling and automation for the SE ecosystem."
 
-# === Structural contract ===
+[layer]
+space = "admin"
+role = "administration"
+
+# === Dependencies ===
 
 [depends]
-# WHY: Constitution is the root; no upstream dependencies
-optional = []
 required = ["se-constitution"]
+optional = []
+
+# === Provided artifacts ===
 
 [provides]
 # WHY: Explicit artifact ownership (core to this repository)
 artifacts = [
+  "manifest-schema",
   "scaffold",
   "sync",
   "validation-orchestration",
@@ -62,11 +70,19 @@ pattern = "se-*"
 # WHY: Declares governing authority for this repository
 authority = "structural-explainability"
 
-# === External references ===
+# === Compatibility ===
+
+[compatibility]
+# WHY: Declare compatibility guarantees for this repository.
+constitution = "se-constitution"
+
+# === Citation ===
 
 [citation]
 cff = "CITATION.cff"
+preferred = "CITATION.cff"
+
+# === Traceability ===
 
 [traceability]
-# WHY: Reserved for future identifier resolution
 identifier_map = "none"

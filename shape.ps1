@@ -2,6 +2,7 @@
 Clear-Host
 
 $ignore = @(
+    '\\\.cache\\',
     '\\\.git\\',
     '\\\.venv\\',
     '\\__pycache__\\',

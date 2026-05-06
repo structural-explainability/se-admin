@@ -16,7 +16,10 @@ readme = "README.md"
 requires-python = ">=3.15"
 dynamic = ["version"] # WHY: Version is computed from git tags at build time (see [tool.hatch.version] below).
 
-dependencies = ["tomlkit"] # REQ for patch_toml.py script, which is used in some tasks to modify TOML files.
+dependencies = [
+    "se-manifest-schema", # WHY: Core data models for manifest-driven automation.
+    "tomlkit" # REQ for patch_toml.py script, which is used in some tasks to modify TOML files.
+]
 
 [project.optional-dependencies]
 # WHY: Optional dependency groups keep the core install clean and focused.
@@ -32,7 +35,7 @@ dev = [
 
 docs = [
     # REQ.DOCS.DEPS: External packages used to generate project documentation.
-    "zensical",
+    "zensical==0.0.37", # WHY: Link resolution fails with newer versions; pinning to a known working version.
 ]
 
 # ============================================================
@@ -52,7 +55,10 @@ reportMissingTypeStubs = "none" # WHY: Avoid warnings from third-party libraries
 reportMissingImports = "warning" # WHY: Warn about missing imports to catch potential issues, but allow flexibility in notebooks and dynamic code.
 reportPrivateUsage = "none" # WHY: Allow usage of private members (e.g., _version.py) without warnings, as this is common in Python projects.
 typeCheckingMode = "basic" # strict | basic | off
-useLibraryCodeForTypes = false # WHY: Avoid type checking third-party library code to reduce noise and improve performance.
+
+[[tool.pyright.executionEnvironments]]
+root = "tests"
+
 
 # === PYTEST (VERIFY LOGIC) ===
 
@@ -149,12 +155,28 @@ requires = ["hatchling", "hatch-vcs"]
 # CUSTOM: Must match src/ folders.
 version-file = "src/se_admin/_version.py"
 
+[tool.hatch.build.targets.sdist]
+include = [
+  "README.md",
+  "LICENSE",
+  "pyproject.toml",
+  "src/se_admin",
+  "tests",
+  "data",
+  "docs",
+  "zensical.toml",
+]
+
 [tool.hatch.build.targets.wheel]
 # CUSTOM: Must match src/ folders.
 packages = ["src/se_admin"]  # REQ.PACKAGES: Discovery rooted at src/.
 
 [tool.hatch.version]
-# WHY: Version derived from git tags at build time - no manual source file edits.
+# WHY: Version derived from git tags at build time
 source = "vcs"
-fallback-version = "0.1.0"              # Used when no git tags present (fresh clone, CI).
+# WHY: Allow hatch-vcs/setuptools-scm to find the Git root when the project
+# is built from a subdirectory, temporary build directory, or isolated build env.
+search_parent_directories = true
+# Used when no git tags present (fresh clone, CI).
+fallback-version = "0.2.0"
 tag-pattern = "^(?:v)?(?P<version>\\d+\\.\\d+\\.\\d+)$"

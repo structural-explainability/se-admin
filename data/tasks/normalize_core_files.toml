@@ -7,6 +7,9 @@ label = "Normalize core configuration files"
 [source]
 repo = "se-admin"
 
+[selector]
+repo_sets = ["python_tooling", "python_package"]
+
 # === STANDARD FILES ===
 
 # Ensure all canonical files
