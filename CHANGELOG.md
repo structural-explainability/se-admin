@@ -77,7 +77,6 @@ and this project adheres to **[Semantic Versioning](https://semver.org/spec/v2.0
 ### Fixed
 
 - `domain/operations.py` forward reference resolved with
-  `from __future__ import annotations`
 - Ruff suppressions: `S603`, `S607` (subprocess), `S310` (urlopen)
 
 ---

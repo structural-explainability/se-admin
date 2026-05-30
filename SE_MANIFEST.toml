@@ -4,9 +4,9 @@
 # ============================================================
 
 schema = "se-manifest-schema"
-schema_url = "https://raw.githubusercontent.com/structural-explainability/se-manifest-schema/blob/main/manifest-schema.toml"
+schema_url = "https://raw.githubusercontent.com/structural-explainability/se-manifest-schema/main/manifest-schema.toml"
 
-# === Identity ===
+# === Repository Identity ===
 
 [meta]
 purpose = "Manage repository projects in the Structural Explainability ecosystem."
@@ -20,41 +20,48 @@ status = "active"
 since = "2026"
 summary = "Administrative tooling and automation for the SE ecosystem."
 
+# === Layer Position ===
+
 [layer]
 space = "admin"
 role = "administration"
 
-# === Dependencies ===
+# === Dependency Declarations ===
 
 [depends]
-required = ["se-constitution"]
+required = [
+  { repo = "se-constitution", kind = "semantic", version = "main" },
+]
+
 optional = []
 
-# === Provided artifacts ===
+# === Provided Artifacts ===
 
 [provides]
 # WHY: Explicit artifact ownership (core to this repository)
 artifacts = [
-  "manifest-schema",
-  "scaffold",
-  "sync",
-  "validation-orchestration",
-  "workflows",
+    "manifest-schema",
+    "scaffold",
+    "sync",
+    "validation-orchestration",
+    "workflows",
 ]
+
+# === Scope ===
 
 [scope]
 # WHY: Keep this tight and structural
 includes = [
-  "repository scaffolding",
-  "configuration propagation",
-  "cross-repository validation execution",
-  "shared workflow definitions",
+    "repository scaffolding",
+    "configuration propagation",
+    "cross-repository validation execution",
+    "shared workflow definitions",
 ]
 
 excludes = [
-  "definition of structural primitives",
-  "definition of validation rules",
-  "domain semantics",
+    "definition of structural primitives",
+    "definition of validation rules",
+    "domain semantics",
 ]
 
 [validation]

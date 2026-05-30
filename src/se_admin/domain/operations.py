@@ -1,12 +1,9 @@
 """Operation type tree for se_admin.
 
-Operation =
-  AtomicOperation
-  | OpSequence[Operation]
-  | Conditional(condition, Operation)
+Operation is the recursive operation type used by the se_admin migration
+interpreter. Atomic operations may be composed with ordered sequences and
+conditionals.
 """
-
-from __future__ import annotations
 
 from dataclasses import dataclass, field
 
@@ -160,7 +157,7 @@ class RunCommand:
 class OpSequence:
     """Execute a list of operations in order."""
 
-    steps: list[Operation]
+    steps: list["Operation"]
 
 
 @dataclass
@@ -168,15 +165,15 @@ class Conditional:
     """Execute *then* only when *condition* check passes; optionally *otherwise*."""
 
     condition: CheckPath | CheckTomlKey
-    then: Operation
-    otherwise: Operation | None = None
+    then: "Operation"
+    otherwise: "Operation | None" = None
 
 
 # ===========================================================================
 # Union types
 # ===========================================================================
 
-AtomicOperation = (
+type AtomicOperation = (
     CheckPath
     | CheckTomlKey
     | CopyFile
@@ -191,4 +188,4 @@ AtomicOperation = (
     | RunCommand
 )
 
-Operation = AtomicOperation | OpSequence | Conditional
+type Operation = AtomicOperation | OpSequence | Conditional
