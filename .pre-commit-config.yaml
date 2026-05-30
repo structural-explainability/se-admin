@@ -115,18 +115,17 @@ repos:
   - repo: local
     hooks:
 
-      # - id: se-manifest-validate
-      #   name: E1) Validate MANIFEST.toml against schema
-      #   language: system
-      #   entry: uv run se-manifest validate --strict
-      #   pass_filenames: false
-      #   always_run: true
-
       - id: markdownlint
-        name: E2) Markdown lint
-        # Uses .markdownlint-cli2.yaml if present, otherwise defaults.
+        name: E1) Markdown lint
         language: system
         entry: npx markdownlint-cli2 --fix
+        pass_filenames: false
+        always_run: true
+
+      - id: se-validate-manifest
+        name: E2) Validate manifest against schema
+        language: system
+        entry: uv run se-manifest validate-manifest --strict
         pass_filenames: false
         always_run: true
 

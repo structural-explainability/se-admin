@@ -37,7 +37,7 @@ dev = [
 
 docs = [
     # REQ.DOCS.DEPS: External packages used to generate project documentation.
-    "zensical==0.0.37", # WHY: Link resolution fails with newer versions; pinning to a known working version.
+    "zensical",
 ]
 
 [project.scripts]
